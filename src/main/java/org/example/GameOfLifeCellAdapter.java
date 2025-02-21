@@ -17,6 +17,7 @@ public class GameOfLifeCellAdapter {
             cell.updateState(newValue);
         });
 
+
         return property;
     }
 }

@@ -4,6 +4,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
@@ -15,9 +16,9 @@ import java.util.ResourceBundle;
 
 public class BoardController {
 
-    GameOfLifeBoard golb;
-    GameOfLifeCellStringConverter converter = new GameOfLifeCellStringConverter();
-    FileChooser fileChooser = new FileChooser();
+    private GameOfLifeBoard golb;
+    private final GameOfLifeCellStringConverter converter = new GameOfLifeCellStringConverter();
+    private final FileChooser fileChooser = new FileChooser();
     private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
     @FXML
@@ -76,12 +77,17 @@ public class BoardController {
             for (int j = 0; j < width; j++) {
                 Label label;
 
+
                 BooleanProperty cellProperty = GameOfLifeCellAdapter
                         .createBooleanPropertyGameOfLifeCell(golb.getCell(j, i));
 
                 String[] separateString = converter.toString(cellProperty.get()).split(";");
                 label = new Label(separateString[0]);
                 label.setStyle("-fx-text-fill: " + separateString[1] + ";");
+                label.setStyle(label.getStyle() + "-fx-font-family: 'Courier New';");
+
+
+
 
                 if (height > 16) {
                     label.setStyle(label.getStyle() + "-fx-font-size: 15px;");
